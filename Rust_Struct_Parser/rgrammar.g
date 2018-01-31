@@ -16,7 +16,7 @@
 //a use is made up of one or more namespaces
 //the keyword use and a semicolon
 usedecl: "use" namespace+ ";"
-?namespace: ["::"] rtype
+?namespace: ["::"] name
 
 //define extern crate statements
 externcrate: "extern" "crate" name [optionalas] ";"
@@ -50,7 +50,7 @@ decl: [ispub] name ":" modifiedtype [","]
     | array
 
 //arrays are a type and an int
-array: "[" modifiedtype ";" /[0-9]+/ "]"
+array: "[" modifiedtype ";" /[1-9]{1}[0-9]*/ "]"
 
 //pointers are mut or const
 pointer: "*" mutable
