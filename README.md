@@ -38,6 +38,8 @@ python .\rust_struct_parser.py .\Sample\readme_sample.rs -o .\test_output\
 
 In the 'test_output' directory you would have the following files:
 
+Note that you will not see 'bar' translated because it doesn't have a ```#[repr(C)]``` on it, and won't work correctly in an API
+
 #### C#
 
 ```c#
