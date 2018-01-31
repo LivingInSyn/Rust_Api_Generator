@@ -23,6 +23,8 @@ pub struct foo {
     pub an_i16: i16,
     pub a_c_char: *mut c_char,
     pub c_void: *mut c_void,
+    /* I won't be here*/
+    pub an_array: [i32;10],    
 }
 
 pub struct bar {
@@ -58,6 +60,8 @@ namespace output
 		[MarshalAs(UnmanagedType.LPStr)]
 		public string a_c_char;
 		public IntPtr c_void;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
+		public int[] an_array;
 	}
 
 }
@@ -76,12 +80,15 @@ typedef struct fooTag {
 	short an_i16;
 	signed char a_c_char;
 	void* c_void;
+	int an_array[10];
 } foo;
+
+#endif
 ```
 
 #### Python
 ```python
-from ctypes import Structure, c_short, c_byte, c_void_p
+from ctypes import Structure, c_short, c_byte, c_void_p, c_int
 
 class foo(Structure):
     _fields_ = [
@@ -89,6 +96,7 @@ class foo(Structure):
         ("an_i16", c_short),
         ("a_c_char", c_byte),
         ("c_void", c_void_p),
+        ("an_array", c_int * 10),
         ]
 
 ```
