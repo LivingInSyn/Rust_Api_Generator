@@ -1,3 +1,6 @@
+# Current Development
+Development is moving to a pure-rust solution using serde and procedural macros. It can be found here: https://github.com/LivingInSyn/Translator
+
 # Rust_Api_Generator
 a toolset for autogenerating rust APIs and translating structs. This tool utilizes an excellent parser written by Erez Shinan called Lark (https://github.com/erezsh/lark) to build abstract syntax trees utilizing context free grammars.
 
