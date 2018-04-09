@@ -219,8 +219,12 @@ class StructConverter:
         #otherwise, look it up and write it
         filetypes["cs"].write("\t\tpublic {} {};\n".format(self.get_cs_map(field[2][1], True), field[1]))
         filetypes["cpp"].write("\t{} {};\n".format(self.get_cpp_map(field[2][1]), field[1]))
+        if field[2][1] == "c_char":
+            pyfield = field[2][1]+"_pntr"
+        else:
+            pyfield = field[2][1]
         filetypes["pyf"].write('        ("{}", {}),\n'.format(field[1],
-                                                              self.get_py_map(field[2][1], pyimports)))
+                                                              self.get_py_map(pyfield, pyimports)))
 
     def _write_arrays(self, filetypes, field, pyimports):
         arrtype = field[2][1][0]
