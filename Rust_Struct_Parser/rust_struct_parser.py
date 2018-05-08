@@ -218,13 +218,15 @@ class StructConverter:
             filetypes["cs"].write("\t\t[MarshalAs(UnmanagedType.LPStr)]\n")
         #otherwise, look it up and write it
         filetypes["cs"].write("\t\tpublic {} {};\n".format(self.get_cs_map(field[2][1], True), field[1]))
-        filetypes["cpp"].write("\t{} {};\n".format(self.get_cpp_map(field[2][1]), field[1]))
+        
+        #for python and c++, if it's a c_char, add _pntr to the end
         if field[2][1] == "c_char":
-            pyfield = field[2][1]+"_pntr"
+            charfield = field[2][1]+"_pntr"
         else:
-            pyfield = field[2][1]
+            charfield = field[2][1]
+        filetypes["cpp"].write("\t{} {};\n".format(self.get_cpp_map(charfield), field[1]))
         filetypes["pyf"].write('        ("{}", {}),\n'.format(field[1],
-                                                              self.get_py_map(pyfield, pyimports)))
+                                                              self.get_py_map(charfield, pyimports)))
 
     def _write_arrays(self, filetypes, field, pyimports):
         arrtype = field[2][1][0]
